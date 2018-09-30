@@ -1,0 +1,5 @@
+/* borrar un elemento de una lista */
+borrar(X,[X],[]).
+borrar(X,[X|Y],Y).
+borrar(X,[Z|L],[Z|M]):-borrar(X,L,M).
+

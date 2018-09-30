@@ -1,0 +1,23 @@
+/* Funcion hanio, se le proporciona un numero N, que es la cantidad de discos en la torre de la izquierda, internamente la funcion utiliza una torre central para el paso de los discos entre la izquierda y la derecha*/
+
+hanoi(N):-move(N,'A','C','B').
+/*La funcion inicial llama a la que tiene dentro, "move" esta es la encargada de dos acciones, la primera es si N=0, devolver un true, indicando que la ordenacion ya esta realizada, en otro caso vuelve a llamarse a si misma restandole 1 a N*/
+
+	move(0,_,_,_):-!.
+	move(N,Origen,Destino,Auxiliar):-M is N-1,
+				move(M,Origen,Auxiliar,Destino),
+				primitive(Origen,Destino),
+				move(M,Auxiliar,Destino,Origen).
+
+	primitive(X,Y):-writelist(['Mueve', el, disco, de, X, a, Y]),
+			nl.
+
+	writelist([]).
+	writelist([H|T]):-write(H),
+			write(' '),
+			writelist(T).
+
+
+movHanoi(F):-eleva(F).
+
+eleva(F):- J is 2^F-1,write('Movimientos '),write('necesarios: '), write(J),nl.
